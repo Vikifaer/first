@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- xmlns:xml name space 是每一个schema唯一标识 -->
+<beans xmlns="http://www.springframework.org/schema/beans" 
+	   xmlns:context="http://www.springframework.org/schema/context"
+	   xmlns:mvc="http://www.springframework.org/schema/mvc" 
+	   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	   xsi:schemaLocation="http://www.springframework.org/schema/beans
+	   					   http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
+	   					   http://www.springframework.org/schema/context
+	   					   http://www.springframework.org/schema/context/spring-context-3.2.xsd
+	   					   http://www.springframework.org/schema/mvc
+	   					   http://www.springframework.org/schema/mvc/spring-mvc-3.2.xsd">
+
+	<!-- 扫描所有控制器中的注解 -->
+	<context:component-scan base-package="com.baizhi.lg" use-default-filters="false">
+		<context:include-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
+	</context:component-scan>
+	<!-- 
+		MVC中基于注解开发，导入注解驱动
+		<mvc:annotation-driven/>
+	 -->
+	<mvc:annotation-driven></mvc:annotation-driven>
+	<!-- 视图解析器：解析视图
+	     控制器方法的返回值，会被视图解析器捕获。"abc"
+	     根据捕获的内容，解析出一个视图地址:/abc.jsp
+	 -->
+	<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="prefix" value="/"></property>
+		<property name="suffix" value=".jsp"></property>
+	</bean>
+	<!-- 
+		静态资源：html,js,css,jpg
+		访问404 解决
+	 -->
+	 <mvc:default-servlet-handler/>
+	 
+</beans>
+
+
+
